@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/customers"
+        android:title="Customers"
+        android:icon="@drawable/baseline_co_present_24"/>
+    <item
+        android:id="@+id/services"
+        android:title="Services"
+        android:icon="@drawable/baseline_construction_24"/>
+    <item
+        android:title="Add"
+    />
+    <item
+        android:id="@+id/warehouse"
+        android:title="Warehouse"
+        android:icon="@drawable/baseline_factory_24"/>
+    <item
+        android:id="@+id/members"
+        android:title="Members"
+        android:icon="@drawable/baseline_person_24"/>
+</menu>
