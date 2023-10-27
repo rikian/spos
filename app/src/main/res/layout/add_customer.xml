@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!--  Header  -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerAddCustomer"
         android:layout_width="match_parent"
@@ -37,6 +38,7 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--  Body  -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bodyAddCustomer"
         android:layout_width="match_parent"
@@ -132,7 +134,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
             <ImageView
-                android:id="@+id/img_prev_customer"
+                android:id="@+id/img_prev_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxWidth="150dp"
@@ -154,13 +156,13 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/btn_take_img_customer"
+                android:id="@+id/btn_take_img_product"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="20dp"
                 android:background="@color/blue_d"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/img_prev_customer"
+                app:layout_constraintStart_toEndOf="@+id/img_prev_product"
                 android:src="@drawable/baseline_photo_camera_24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

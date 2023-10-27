@@ -12,14 +12,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
+import com.gulali.spos.database.CustomerDB
+import com.gulali.spos.database.CustomerEntity
+import com.gulali.spos.database.ProductEntity
 import com.gulali.spos.helper.NoEnterInputFilter
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
-import java.util.UUID
 
 class AddCustomer: ComponentActivity() {
     private lateinit var btnBack: ImageView
@@ -40,8 +41,8 @@ class AddCustomer: ComponentActivity() {
         nCName.filters = arrayOf(NoEnterInputFilter())
         nCPhone = findViewById(R.id.anc_edt_phone)
         nCPhone.filters = arrayOf(NoEnterInputFilter())
-        nCImage = findViewById(R.id.btn_take_img_customer)
-        nCImagePreview = findViewById(R.id.img_prev_customer)
+        nCImage = findViewById(R.id.btn_take_img_product)
+        nCImagePreview = findViewById(R.id.img_prev_product)
         btnSave = findViewById(R.id.btn_save_nc)
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -60,32 +61,32 @@ class AddCustomer: ComponentActivity() {
         }
 
         // Set an OnClickListener for the btnSave button
-        btnSave.setOnClickListener {
-            if (capturedImage != null) {
-                val uniqueFilename = "${UUID.randomUUID()}.jpeg"
-                // Sava data customer to room
-                // Save the captured image to local storage
-                saveImageToLocalStorage(capturedImage, uniqueFilename)
-                Toast.makeText(this, "Image saved", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, "No image to save", Toast.LENGTH_LONG).show()
-            }
-        }
-
 //        btnSave.setOnClickListener {
-//            // Toast.makeText(this, "Save Customer", Toast.LENGTH_LONG).show()
-//            // save customer to DBroom
-//            val db = CustomerDB.getCustomerDatabase(applicationContext)
-//            val cusDao = db.customerDAO()
-//            val customer = CustomerEntity(
-//                name = nCName.text.toString(),
-//                phone = nCPhone.text.toString(),
-//                createdAt = "12-12-12",
-//                updatedAt = "12-12-12",
-//            )
-//            cusDao.insertCustomer(customer)
-//            finish()
+//            if (capturedImage != null) {
+//                val uniqueFilename = "${UUID.randomUUID()}.jpeg"
+//                // Sava data customer to room
+//                // Save the captured image to local storage
+//                saveImageToLocalStorage(capturedImage, uniqueFilename)
+//                Toast.makeText(this, "Image saved", Toast.LENGTH_LONG).show()
+//            } else {
+//                Toast.makeText(this, "No image to save", Toast.LENGTH_LONG).show()
+//            }
 //        }
+
+        btnSave.setOnClickListener {
+            // Toast.makeText(this, "Save Customer", Toast.LENGTH_LONG).show()
+            // save customer to DBroom
+            val db = CustomerDB.getCustomerDatabase(applicationContext)
+            val cusDao = db.customerDAO()
+            val customer = CustomerEntity(
+                name = nCName.text.toString(),
+                phone = nCPhone.text.toString(),
+                createdAt = "12-12-12",
+                updatedAt = "12-12-12",
+            )
+            cusDao.insertCustomer(customer)
+            finish()
+        }
 
         btnBack.setOnClickListener {
             finish()

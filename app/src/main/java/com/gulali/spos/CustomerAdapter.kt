@@ -19,8 +19,8 @@ class CustomerAdapter(listItems: List<CustomerEntity>, private var context: Cont
         var csID: TextView = view.findViewById(R.id.csId)
         var csName: TextView = view.findViewById(R.id.csName)
         var csPhone: TextView = view.findViewById(R.id.csPhone)
-        var csCreatedAt: TextView = view.findViewById(R.id.csCreatedAt)
-        var csUpdatedAt: TextView = view.findViewById(R.id.csUpdatedAt)
+//        var csCreatedAt: TextView = view.findViewById(R.id.csCreatedAt)
+//        var csUpdatedAt: TextView = view.findViewById(R.id.csUpdatedAt)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
@@ -37,7 +37,7 @@ class CustomerAdapter(listItems: List<CustomerEntity>, private var context: Cont
         holder.csID.text = cs.id.toString()
         holder.csName.text = cs.name
         holder.csPhone.text = cs.phone
-        holder.csCreatedAt.text = cs.createdAt
-        holder.csUpdatedAt.text = cs.updatedAt
+//        holder.csCreatedAt.text = cs.createdAt
+//        holder.csUpdatedAt.text = cs.updatedAt
     }
 }

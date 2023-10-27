@@ -12,3 +12,20 @@ interface CustomerDao {
     @Insert
     fun insertCustomer(data: CustomerEntity)
 }
+
+@Dao
+interface UnitDao {
+    @Query("SELECT * FROM units")
+    fun getUnits(): List<UnitEntity>
+
+    @Query("SELECT * FROM units WHERE id = :unitId")
+    fun getUnit(unitId: Int): UnitEntity?
+
+    @Insert
+    fun insertUnit(data: UnitEntity)
+}
+
+@Dao
+interface ProductDao {
+
+}

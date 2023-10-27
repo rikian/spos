@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cusDao: CustomerDao
     private lateinit var bottomSheet: BottomSheetDialogFragment
 
-    var customerAdapter: CustomerAdapter ?= null
+    private var customerAdapter: CustomerAdapter ?= null
     private var linearLayoutManager: LinearLayoutManager ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {

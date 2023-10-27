@@ -37,3 +37,36 @@ abstract class CustomerDB: RoomDatabase() {
         }
     }
 }
+
+@Database(
+    entities = [UnitEntity::class],
+    version = 1
+)
+abstract class UnitDB: RoomDatabase() {
+    abstract fun unitDao(): UnitDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: UnitDB? = null
+
+        fun getCustomerDatabase(context: Context): UnitDB {
+            val tmplInstant = INSTANCE
+            if (tmplInstant != null) {
+                return tmplInstant
+            }
+
+            synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    UnitDB::class.java,
+                    "units"
+                )
+                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build()
+                INSTANCE = instance
+                return instance
+            }
+        }
+    }
+}
