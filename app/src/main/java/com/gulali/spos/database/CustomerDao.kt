@@ -5,16 +5,14 @@ import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
-interface CustomerDao {
+interface SposDao {
+    // customers Dao
     @Query("SELECT * FROM customer ORDER BY id DESC")
     fun getCustomers(): List<CustomerEntity>
-
     @Insert
     fun insertCustomer(data: CustomerEntity)
-}
 
-@Dao
-interface UnitDao {
+    // unit Dao
     @Query("SELECT * FROM units")
     fun getUnits(): List<UnitEntity>
 
@@ -23,9 +21,16 @@ interface UnitDao {
 
     @Insert
     fun insertUnit(data: UnitEntity)
-}
 
-@Dao
-interface ProductDao {
+    // Product Dao
+    @Query("SELECT * FROM products AS a INNER JOIN units AS b ON a.unit = b.id")
+    fun getProducts(): List<ProductEntity>
 
+    @Query(
+        "SELECT a.id AS productID, a.image AS productImg, a.name AS productName, a.quantity AS productStock, b.name AS productUnit, a.updatedAt AS productUpdate FROM products AS a INNER JOIN units AS b ON a.unit = b.id"
+    )
+    fun getProductsForViewMenu(): List<ProductForViewMenu>
+
+    @Insert
+    fun insertProduct(data: ProductEntity)
 }

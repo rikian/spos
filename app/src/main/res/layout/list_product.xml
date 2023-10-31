@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -20,6 +21,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp">
+
+            <TextView
+                android:id="@+id/product_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/product_image"
@@ -40,78 +50,42 @@
 
                 <TextView
                     android:id="@+id/product_name"
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:text="Sampurna mild"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/product_stock"
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:text="3 bungkus"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="3"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/product_name" />
 
                 <TextView
+                    android:id="@+id/product_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="5dp"
+                    android:text="bungkus"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toEndOf="@+id/product_stock"
+                    app:layout_constraintTop_toBottomOf="@+id/product_name" />
+
+                <TextView
                     android:id="@+id/product_update"
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:text="17-10-2010 (08:19 WIB)"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/product_stock" />
-
-<!--                <TextView-->
-<!--                    android:id="@+id/csCreatedAt"-->
-<!--                    android:layout_width="100dp"-->
-<!--                    android:layout_height="20dp"-->
-<!--                    android:text="Hello world"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/csPhone" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/csUpdatedAt"-->
-<!--                    android:layout_width="100dp"-->
-<!--                    android:layout_height="20dp"-->
-<!--                    android:text="Hello world"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/csCreatedAt" />-->
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/status_bg"
-                android:padding="5dp"
-                android:text="Rp 20.000 ,-"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/product_image"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
-
-            <TextView
-                android:id="@+id/keuntungan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/status_bg"
-                android:backgroundTint="@color/green"
-                android:padding="5dp"
-                android:text="Rp 20.000 ,-"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

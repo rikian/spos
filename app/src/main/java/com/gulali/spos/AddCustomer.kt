@@ -14,9 +14,8 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.activity.ComponentActivity
 import androidx.core.app.ActivityCompat
-import com.gulali.spos.database.CustomerDB
 import com.gulali.spos.database.CustomerEntity
-import com.gulali.spos.database.ProductEntity
+import com.gulali.spos.database.SposDB
 import com.gulali.spos.helper.NoEnterInputFilter
 import java.io.File
 import java.io.FileOutputStream
@@ -76,8 +75,8 @@ class AddCustomer: ComponentActivity() {
         btnSave.setOnClickListener {
             // Toast.makeText(this, "Save Customer", Toast.LENGTH_LONG).show()
             // save customer to DBroom
-            val db = CustomerDB.getCustomerDatabase(applicationContext)
-            val cusDao = db.customerDAO()
+            val db = SposDB.getSposDatabase(applicationContext)
+            val cusDao = db.sposDAO()
             val customer = CustomerEntity(
                 name = nCName.text.toString(),
                 phone = nCPhone.text.toString(),

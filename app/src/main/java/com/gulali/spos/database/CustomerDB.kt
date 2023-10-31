@@ -6,17 +6,17 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [CustomerEntity::class],
+    entities = [CustomerEntity::class, ProductEntity::class, UnitEntity::class],
     version = 1
 )
-abstract class CustomerDB: RoomDatabase() {
-    abstract fun customerDAO(): CustomerDao
+abstract class SposDB: RoomDatabase() {
+    abstract fun sposDAO(): SposDao
 
     companion object {
         @Volatile
-        private var INSTANCE: CustomerDB? = null
+        private var INSTANCE: SposDB? = null
 
-        fun getCustomerDatabase(context: Context): CustomerDB {
+        fun getSposDatabase(context: Context): SposDB {
             val tmplInstant = INSTANCE
             if (tmplInstant != null) {
                 return tmplInstant
@@ -25,41 +25,8 @@ abstract class CustomerDB: RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    CustomerDB::class.java,
-                    "customers"
-                )
-                    .allowMainThreadQueries()
-                    .fallbackToDestructiveMigration()
-                    .build()
-                INSTANCE = instance
-                return instance
-            }
-        }
-    }
-}
-
-@Database(
-    entities = [UnitEntity::class],
-    version = 1
-)
-abstract class UnitDB: RoomDatabase() {
-    abstract fun unitDao(): UnitDao
-
-    companion object {
-        @Volatile
-        private var INSTANCE: UnitDB? = null
-
-        fun getCustomerDatabase(context: Context): UnitDB {
-            val tmplInstant = INSTANCE
-            if (tmplInstant != null) {
-                return tmplInstant
-            }
-
-            synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    UnitDB::class.java,
-                    "units"
+                    SposDB::class.java,
+                    "spos"
                 )
                     .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()

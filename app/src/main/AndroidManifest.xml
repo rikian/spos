@@ -35,6 +35,10 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".AddTransaction"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Spos">

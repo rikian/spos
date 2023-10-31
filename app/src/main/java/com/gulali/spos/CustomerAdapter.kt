@@ -16,9 +16,9 @@ class CustomerAdapter(listItems: List<CustomerEntity>, private var context: Cont
     }
 
     inner class CustomerViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        var csID: TextView = view.findViewById(R.id.csId)
-        var csName: TextView = view.findViewById(R.id.csName)
-        var csPhone: TextView = view.findViewById(R.id.csPhone)
+        var csID: TextView = view.findViewById(R.id.product_name)
+        var csName: TextView = view.findViewById(R.id.product_stock)
+        var csPhone: TextView = view.findViewById(R.id.product_update)
 //        var csCreatedAt: TextView = view.findViewById(R.id.csCreatedAt)
 //        var csUpdatedAt: TextView = view.findViewById(R.id.csUpdatedAt)
     }

@@ -34,6 +34,11 @@ open class BottomSheetFragment: BottomSheetDialogFragment() {
             val intent = Intent(context, AddProduct::class.java)
             startActivity(intent)
         }
+
+        binding.addTransaction.setOnClickListener {
+            val intent = Intent(context, AddTransaction::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {

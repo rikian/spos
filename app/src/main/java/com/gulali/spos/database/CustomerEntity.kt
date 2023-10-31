@@ -18,9 +18,9 @@ data class CustomerEntity (
 data class UnitEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val name: String,
-    val createdAt: String,
-    val updatedAt: String,
+    var name: String,
+    var createdAt: String,
+    var updatedAt: String,
 )
 
 @Entity(
@@ -33,7 +33,7 @@ data class ProductEntity (
     var image: String,
     var name: String,
     var quantity: Int,
-    var unit: Int, // This column references the "name" column in the UnitEntity
+    var unit: Int,
     var purchase: Int,
     var price: Int,
     var createdAt: String,

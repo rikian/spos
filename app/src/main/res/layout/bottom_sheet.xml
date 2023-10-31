@@ -39,6 +39,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <!-- body -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bg_body"
             android:layout_width="match_parent"
@@ -48,15 +49,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bg_header">
 
+            <!-- transaction -->
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/add_transaction"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_product">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/imageViewtr"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -66,53 +69,24 @@
                     app:tint="@color/black" />
 
                 <TextView
-                    android:id="@+id/textVie"
+                    android:id="@+id/textVietr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="Add Member"
+                    android:text="Add Transaction"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView6"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewtr"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/add_product"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/add_service">
-
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    app:tint="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/baseline_factory_24" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:text="Add Product"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageView9"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+            <!-- customer -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/add_customer"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/add_transaction">
 
                 <ImageView
                     android:id="@+id/tb_customer1"
@@ -136,34 +110,33 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- product -->
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/add_service"
+                android:id="@+id/add_product"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_customer">
 
                 <ImageView
-                    android:id="@+id/ic_add_service"
+                    android:id="@+id/imageView9"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginEnd="352dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/baseline_person_add_24" />
+                    app:srcCompat="@drawable/baseline_factory_24"
+                    app:tint="@color/black" />
 
                 <TextView
-                    android:id="@+id/txt_add_service"
+                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="Add Service"
+                    android:text="Add Product"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/ic_add_service"
+                    app:layout_constraintStart_toEndOf="@+id/imageView9"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

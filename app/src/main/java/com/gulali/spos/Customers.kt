@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.gulali.spos.database.CustomerDB
-import com.gulali.spos.database.CustomerEntity
 
 class Customers() : Fragment() {
     private lateinit var recycleTask: RecyclerView

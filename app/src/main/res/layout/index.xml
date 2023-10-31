@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <!--  header  -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_index"
         android:layout_width="match_parent"
@@ -101,6 +102,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!--  body  -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/body_index"
         android:layout_width="match_parent"
@@ -111,82 +113,53 @@
         app:layout_constraintTop_toBottomOf="@+id/header_index">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <!--  customer  -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/customer_view"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_marginBottom="210dp"
+                android:layout_weight="1" />
+
+            <!--  service  -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/service_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_marginBottom="160dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/service_view" />
+                android:layout_weight="1"
+                android:visibility="gone" />
 
-            <TextView
+            <!--  product  -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/warehouse_view"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="Tidak ada lagi data yang ditamplkan" />
+                android:layout_height="0dp"
+                android:layout_marginBottom="160dp"
+                android:layout_weight="1"
+                android:visibility="gone" />
 
+            <!-- member member -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/member_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="160dp"
+                android:layout_weight="1"
+                android:visibility="gone" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/service_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:animateLayoutChanges="true"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/warehouse_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:id="@+id/serview_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Service view" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/warehouse_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:animateLayoutChanges="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/wareviewtext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Warehowse view" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/member_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:animateLayoutChanges="true"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/memviewtext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Member view" />
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- footer -->
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"

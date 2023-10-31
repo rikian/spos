@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/headerAddUnit"
+        android:id="@+id/header_transaction"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/blue_d"
@@ -43,7 +43,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headerAddUnit">
+        app:layout_constraintTop_toBottomOf="@+id/header_transaction">
 
         <!--  name  -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,7 +68,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/anp_edt_name"
+                android:id="@+id/unit_name"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/bg_input"
