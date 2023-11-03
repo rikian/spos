@@ -21,7 +21,7 @@ class ProductAdapter(
     private val context: Context,
     private val contentResolver: ContentResolver
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
-
+    private var itemClickListener: OnItemClickListener? = null
     private var products: List<ProductForViewMenu> = listProducts
 
     init {
@@ -39,6 +39,10 @@ class ProductAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.list_product, parent, false)
+        val viewHolder = ProductViewHolder(view)
+        viewHolder.itemView.setOnClickListener {
+            itemClickListener?.onItemClick(viewHolder.absoluteAdapterPosition)
+        }
         return ProductViewHolder(view)
     }
 
@@ -46,7 +50,14 @@ class ProductAdapter(
         return products.size
     }
 
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            itemClickListener?.onItemClick(position)
+        }
         val product = products[position]
         holder.pID.text = product.productID.toString()
         holder.pName.text = product.productName
@@ -59,6 +70,10 @@ class ProductAdapter(
                 .load(file)
                 .into(holder.pImage)
         }
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        itemClickListener = listener
     }
 
     private fun getFileName(fileName: String): Uri? {

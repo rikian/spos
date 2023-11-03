@@ -1,108 +1,193 @@
 package com.gulali.spos
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.gulali.spos.adapter.ProductAdapter
+import com.gulali.spos.adapter.ProductCartAdapter
+import com.gulali.spos.database.ProductForViewMenu
+import com.gulali.spos.database.SposDB
+import com.gulali.spos.database.SposDao
 
 class AddTransaction: ComponentActivity() {
-    // on below line we are
-    // creating variables for listview
-    lateinit var programmingLanguagesLV: ListView
+    private lateinit var searchProduct: AppCompatEditText
+    private lateinit var productView: RecyclerView
+    private lateinit var cart: RecyclerView
+    private lateinit var payout: Button
+    private var productAdapter: ProductAdapter? = null
+    private var productInCartAdapter: ProductCartAdapter? = null
+    private var linearLayoutManagerProduct: LinearLayoutManager? = null
+    private var linearLayoutManagerCart: LinearLayoutManager? = null
+    private lateinit var sposDao: SposDao
 
-    // creating array adapter for listview
-    lateinit var listAdapter: ArrayAdapter<String>
-
-    // creating array list for listview
-    lateinit var programmingLanguagesList: ArrayList<String>;
-
-    // creating variable for searchview
-    lateinit var searchView: AppCompatEditText
+    private var productInCart: MutableList<ProductForViewMenu> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_transaction)
 
-        // initializing variables of list view with their ids.
-        programmingLanguagesLV = findViewById(R.id.idLVProgrammingLanguages)
-        searchView = findViewById(R.id.idSV)
+        payout = findViewById(R.id.payout)
+        searchProduct = findViewById(R.id.idSV)
+        sposDao = SposDB.getSposDatabase(applicationContext).sposDAO()
+        productView = findViewById(R.id.product_view)
+        cart = findViewById(R.id.cart_product)
+        linearLayoutManagerProduct = LinearLayoutManager(applicationContext)
+        linearLayoutManagerCart = LinearLayoutManager(applicationContext)
 
-        // initializing list and adding data to list
-        programmingLanguagesList = ArrayList()
-        programmingLanguagesList.add("C")
-        programmingLanguagesList.add("C#")
-        programmingLanguagesList.add("Java")
-        programmingLanguagesList.add("Javascript")
-        programmingLanguagesList.add("Python")
-        programmingLanguagesList.add("Dart")
-        programmingLanguagesList.add("Kotlin")
-        programmingLanguagesList.add("Typescript")
+        payout.setOnClickListener {
+            try {
+                showPayment()
+            } catch (e: Exception) {
+                Toast.makeText(applicationContext, e.message.toString(), Toast.LENGTH_SHORT).show()
+            }
+        }
 
-        // initializing list adapter and setting layout
-        // for each list view item and adding array list to it.
-        listAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, programmingLanguagesList)
-
-        // on below line setting list
-        // adapter to our list view.
-        programmingLanguagesLV.adapter = listAdapter
-
-        // on below line we are adding on query
-        // listener for our search view.
-        var cursorPositionSearch = 0
-        var query: String = ""
-        searchView.addTextChangedListener(object : TextWatcher {
+        var query = ""
+        searchProduct.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                cursorPositionSearch = searchView.selectionStart
+                return
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
+                return
             }
 
             override fun afterTextChanged(s: Editable?) {
                 try {
-                    if (query == s.toString()) {
+                    if (query == s.toString().lowercase()) {
                         return
                     }
-                    query = s.toString()
-                    if (!programmingLanguagesList.contains(query)) {
-                        return Toast.makeText(applicationContext, "No Language found..", Toast.LENGTH_LONG).show()
+                    query = s.toString().lowercase()
+                    val products = sposDao.getProductByName(query)
+                    if (products.isEmpty()) {
+                        Toast.makeText(applicationContext, "product not found", Toast.LENGTH_SHORT).show()
+                        return
                     }
-                    return listAdapter.filter.filter(query)
+                    showAvailableProducts(products)
                 } catch (e: Exception) {
                     Toast.makeText(applicationContext, e.message.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
-
         })
+    }
 
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                // on below line we are checking
-//                // if query exist or not.
-//                if (programmingLanguagesList.contains(query)) {
-//                    // if query exist within list we
-//                    // are filtering our list adapter.
-//                    listAdapter.filter.filter(query)
-//                } else {
-//                    // if query is not present we are displaying
-//                    // a toast message as no  data found..
-//                    Toast.makeText(applicationContext, "No Language found..", Toast.LENGTH_LONG).show()
-//                }
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                // if query text is change in that case we
-//                // are filtering our adapter with
-//                // new text on below line.
-//                listAdapter.filter.filter(newText)
-//                return false
-//            }
-//        })
+    override fun onResume() {
+        super.onResume()
+    }
+
+    fun showPayment() {
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.dialog_payment, null)
+        val alertDialog = builder.setView(dialogLayout).show()
+    }
+
+    fun showQTY(prod: ProductForViewMenu) {
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.dialog_qty, null)
+
+        // text display
+        val pdName  = dialogLayout.findViewById<TextView>(R.id.product_name)
+        val pdOk = dialogLayout.findViewById<Button>(R.id.btn_qty_ok)
+
+        val alertDialog = builder.setView(dialogLayout).show() // Create and show the AlertDialog
+
+        pdOk.setOnClickListener {
+            productInCart.add(prod)
+            showProductInCart(productInCart)
+            // Close the popup
+            alertDialog.dismiss()
+        }
+
+        pdName.text = prod.productName
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun showProductInCart(products: MutableList<ProductForViewMenu>) {
+        productInCartAdapter = ProductCartAdapter(products, applicationContext)
+        cart.layoutManager = linearLayoutManagerCart
+        cart.adapter = productInCartAdapter
+        productInCartAdapter?.notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun showAvailableProducts(products: List<ProductForViewMenu>) {
+        productAdapter = ProductAdapter(products, applicationContext, contentResolver)
+        productAdapter?.setOnItemClickListener(object : ProductAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                try {
+                    val product = products[position]
+                    showQTY(product)
+                } catch (e: Exception) {
+                    Toast.makeText(applicationContext, e.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+        productView.layoutManager = linearLayoutManagerProduct
+        productView.adapter = productAdapter
+        productAdapter?.notifyDataSetChanged()
     }
 }
+
+//private val listUnit = mutableListOf<String>()
+//
+//// Create (Insert) an item to the list
+//fun insertUnit(unit: String) {
+//    listUnit.add(unit)
+//}
+//
+//// Read (Retrieve) the entire list
+//fun readAllUnits(): List<String> {
+//    return listUnit
+//}
+//
+//// Read (Retrieve) a specific item by index
+//fun readUnitByIndex(index: Int): String? {
+//    return if (index >= 0 && index < listUnit.size) {
+//        listUnit[index]
+//    } else {
+//        null
+//    }
+//}
+//
+//// Update (Modify) an item by index
+//fun updateUnitByIndex(index: Int, newUnit: String): Boolean {
+//    return if (index >= 0 && index < listUnit.size) {
+//        listUnit[index] = newUnit
+//        true
+//    } else {
+//        false
+//    }
+//}
+//
+//// Delete (Remove) an item by index
+//fun deleteUnitByIndex(index: Int): Boolean {
+//    return if (index >= 0 && index < listUnit.size) {
+//        listUnit.removeAt(index)
+//        true
+//    } else {
+//        false
+//    }
+//}
+//
+//// Delete (Remove) a specific item
+//fun deleteUnit(unit: String): Boolean {
+//    return listUnit.remove(unit)
+//}

@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Android/Sdk/icons/material/materialicons/photo_camera/baseline_photo_camera_24.xml" />
+                                      <entry key="url" value="file:$USER_HOME$/Android/Sdk/icons/material/materialicons/delete/baseline_delete_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,8 +33,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="cecdcd" />
-                            <entry key="outputName" value="baseline_photo_camera_24" />
+                            <entry key="color" value="b70707" />
+                            <entry key="outputName" value="baseline_delete_24" />
                           </map>
                         </option>
                       </PersistentState>
